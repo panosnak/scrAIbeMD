@@ -36,7 +36,7 @@ def split_audio(audio_path, chunk_length_ms=30000):
     chunks = [audio[i:i + chunk_length_ms] for i in range(0, len(audio), chunk_length_ms)]
     return chunks   
 
-def speech_to_text(input_file, model_id="openai/whisper-base"):
+def speech_to_text(input_file, model_id="openai/whisper-small"):
     device = "cuda:0" if torch.cuda.is_available() else "cpu"
     torch_dtype = torch.float16 if torch.cuda.is_available() else torch.float32
 
