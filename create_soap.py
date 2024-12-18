@@ -36,7 +36,7 @@ def generate_soap_note(transcribed_audio, model_id="meta-llama/Llama-2-7b-chat-h
     with torch.no_grad():
         outputs = model.generate(
             inputs.input_ids,
-            max_new_tokens=300,
+            max_new_tokens=400,
             temperature=0.1,
             top_p=0.95,
             do_sample = False,
