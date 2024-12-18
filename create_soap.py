@@ -14,7 +14,7 @@ def read_patient_info(file_path):
     """
     return Path(file_path).read_text()
 
-def generate_soap_note(transcribed_audio, model_id="meta-llama/Llama-2-7b-chat-hf"):
+def generate_soap_note(transcribed_audio, model_id="meta-llama/Llama-3.2-1B-Instruct"):
     """
     Generates a SOAP note based on the provided patient transcription.
 
