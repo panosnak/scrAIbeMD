@@ -1,6 +1,11 @@
 import torch
 from pathlib import Path
 from transformers import AutoTokenizer, AutoModelForCausalLM
+import os
+import streamlit as st
+
+hf_token = st.secrets["hf_token"]
+os.environ["HUGGINGFACEHUB_API_TOKEN"] = hf_token
 
 def read_patient_info(file_path):
     """
@@ -29,7 +34,7 @@ def generate_soap_note(transcribed_audio, model_id="meta-llama/Llama-3.2-1B-Inst
 
     # Load the LLaMA model and tokenizer
     tokenizer = AutoTokenizer.from_pretrained(model_id)
-    model = AutoModelForCausalLM.from_pretrained(model_id, device_map=device, torch_dtype=torch.float16 if torch.cuda.is_available() else torch.float32)
+    model = AutoModelForCausalLM.from_pretrained(model_id, token=hf_token, device_map=device, torch_dtype=torch.float16 if torch.cuda.is_available() else torch.float32)
     prompt = f"Generate a detailed SOAP note for the following patient case based on the transcribed consultation below:\n{transcribed_audio}\n\nSOAP Note:"
     
     inputs = tokenizer(prompt, return_tensors="pt").to(device)
